@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -92,4 +93,13 @@ public class StoreLoader {
 
     }
 
+    public static void createDirectory(String directory) {
+        Path dir = Paths.get(directory);
+        try {
+            Path createdDirectory = Files.createDirectories(dir.toAbsolutePath());
+            System.out.println("Created: " + createdDirectory);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

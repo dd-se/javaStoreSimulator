@@ -9,7 +9,6 @@ public class Parser {
     static NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "US"));
     static SimpleDateFormat toFileDateFormat = new SimpleDateFormat("_yyyy-MM-dd_HH-mm-ss");
     static SimpleDateFormat newOrderDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    static Date date = new Date();
 
     public static double parseDouble(String doubleString) throws NumberFormatException {
         double aDouble = Double.parseDouble(doubleString);
@@ -22,10 +21,12 @@ public class Parser {
     }
 
     public static String getDate() {
+        Date date = new Date();
         return newOrderDateFormat.format(date);
     }
 
     public static String getNewOrderDate() {
+        Date date = new Date();
         return toFileDateFormat.format(date);
     }
 

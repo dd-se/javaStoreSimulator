@@ -19,6 +19,9 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
+        <configuration>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -61,6 +64,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <argLine>-Dfile.encoding=UTF-8</argLine>
               <transformers>
                 <transformer>
                   <mainClass>com.dodo.App</mainClass>
@@ -131,6 +135,7 @@
     <maven.jar>3.2.0</maven.jar>
     <maven.compiler>3.8.1</maven.compiler>
     <maven.shade>3.2.2</maven.shade>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.install>3.0.0-M1</maven.install>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.resources>3.1.0</maven.resources>

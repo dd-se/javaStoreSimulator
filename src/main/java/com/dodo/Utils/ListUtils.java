@@ -27,8 +27,10 @@ public class ListUtils {
 
     public static void sortCustomersTotalExpenditureList(List<CustomerHelper> collection) {
         Collections.sort(collection);
-        CustomerHelper customerTotalSpent = collection.get(0);
-        customerTotalSpent.setName(customerTotalSpent.getName() + " (⌐■_■)");
+        if (!collection.isEmpty()) {
+            CustomerHelper customerTotalSpent = collection.get(0);
+            customerTotalSpent.setName(customerTotalSpent.getName() + " (⌐■_■)");
+        }
     }
 
     public static List<CustomerHelper> getCustomersTotalExpenditureList(List<Customer> customers,

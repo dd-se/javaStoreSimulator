@@ -1,7 +1,6 @@
 package com.dodo;
 
 import java.util.Scanner;
-
 import com.dodo.Menus.MainMenu;
 import com.dodo.Utils.Colors;
 
