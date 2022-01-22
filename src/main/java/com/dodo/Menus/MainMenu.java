@@ -15,7 +15,7 @@ public class MainMenu {
 
         Store store = StoreLoader.csvToStoreLoader();
 
-        List<String> logo = StoreLoader.readAllLines(StoreLoader.getLogoPath());
+        List<String> logo = StoreLoader.readAllLines(StoreLoader.LOGO);
         StoreLoader.setLogo(logo);
         StoreLoader.printLogo();
         while (true) {
