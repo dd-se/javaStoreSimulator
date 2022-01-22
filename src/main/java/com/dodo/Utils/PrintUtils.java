@@ -110,4 +110,11 @@ public class PrintUtils {
         return true;
     }
 
+    public static void printLogo(List<String> logo) {
+        System.out.print(Colors.GREEN);
+        logo.forEach(line -> {
+            System.out.println(line);
+        });
+        System.out.println(Colors.RESET);
+    }
 }

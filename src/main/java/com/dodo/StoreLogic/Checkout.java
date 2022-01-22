@@ -6,8 +6,8 @@ import java.util.List;
 import com.dodo.Models.Order;
 import com.dodo.Models.Product;
 import com.dodo.Utils.Colors;
+import com.dodo.Utils.FileHandler;
 import com.dodo.Utils.PrintUtils;
-import com.dodo.Utils.StoreLoader;
 
 public class Checkout {
     public static boolean checkout(List<Product> newBasket, List<Order> storeOrders, boolean writeToFile) {
@@ -18,13 +18,15 @@ public class Checkout {
                     TakeOrder.getCustomer().getName() + "." + Colors.RESET);
 
             Order newOrder = Generators.generateOrder(
-                    storeOrders.size() + 1, TakeOrder.getCustomer().getCustId(), newBasket);
+                    storeOrders.size() + 1,
+                    TakeOrder.getCustomer().getCustId(),
+                    newBasket);
             storeOrders.add(newOrder);
 
             PrintUtils.printOrders(Arrays.asList(newOrder));
 
             if (writeToFile) {
-                StoreLoader.WriteOrderToFile(newOrder);
+                FileHandler.WriteOrderToFile(newOrder);
             }
             return true;
         }

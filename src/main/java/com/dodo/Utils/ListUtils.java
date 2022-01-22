@@ -96,7 +96,7 @@ public class ListUtils {
     }
 
     public static String convertToTitleCase(String text) {
-        if (text == null || text.isEmpty()) {
+        if (text.isEmpty()) {
             return text;
         }
         StringBuilder stringBuilder = new StringBuilder();
