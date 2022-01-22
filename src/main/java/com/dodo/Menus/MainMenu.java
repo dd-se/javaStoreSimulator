@@ -1,8 +1,9 @@
 package com.dodo.Menus;
 
+import java.util.List;
+
 import com.dodo.App;
 import com.dodo.Models.Store;
-import com.dodo.Utils.Colors;
 import com.dodo.Utils.StoreLoader;
 
 public class MainMenu {
@@ -12,10 +13,11 @@ public class MainMenu {
 
     public static void startLoop() {
 
-        Store store = StoreLoader.LoadStore();
-        StoreLoader.loadStoreLogo();
+        Store store = StoreLoader.csvToStoreLoader();
 
-        System.out.println(Colors.GREEN + StoreLoader.logo + Colors.RESET);
+        List<String> logo = StoreLoader.readAllLines(StoreLoader.getLogoPath());
+        StoreLoader.setLogo(logo);
+        StoreLoader.printLogo();
         while (true) {
 
             System.out.print(MainMenu.MAIN_MENU);
@@ -23,7 +25,7 @@ public class MainMenu {
 
             if (command.equals("e")) {
                 System.out.println("Bye.");
-                StoreLoader.saveStore(store);
+                StoreLoader.storeToCsvSaver(store);
                 break;
             }
             mainMenu(command, store);

@@ -45,4 +45,9 @@ public class Customer implements Serializable {
         return "Customer ID: " + this.getCustId() + " Customer Name: " + this.getName() + " Customer Email: "
                 + this.getEmail() + " Customer Address: " + this.getAddress();
     }
+
+    public String toCsv() {
+        return this.custId + "," + this.name + "," + this.address + "," + this.email + "\n";
+
+    }
 }

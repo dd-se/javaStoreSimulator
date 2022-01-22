@@ -27,4 +27,30 @@ public class Store implements Serializable {
         return customers;
     }
 
+    public byte[] productsToBytes() {
+        StringBuilder products = new StringBuilder();
+        this.products.forEach(product -> {
+            products.append(product.toCsv());
+        });
+        return products.toString().getBytes();
+
+    }
+
+    public byte[] ordersToBytes() {
+        StringBuilder orders = new StringBuilder();
+        this.orders.forEach(order -> {
+            orders.append(order.toCsv());
+        });
+        return orders.toString().getBytes();
+    }
+
+    public byte[] customersToBytes() {
+        StringBuilder customers = new StringBuilder();
+        this.customers.forEach(customer -> {
+            customers.append(customer.toCsv());
+        });
+        return customers.toString().getBytes();
+
+    }
+
 }

@@ -1,0 +1,10 @@
+1,Frozen Pizza,33.5
+2,Fries,10.5
+3,Ceasar Salad,15.0
+4,Swedish Meatballs,25.5
+5,Halloumi Fries,6.9
+6,Super Combo Plate,22.0
+7,Cheeseburger,13.0
+8,Fakeburger,99.0
+9,Adana Kebab,40.0
+10,Iskender,25.0

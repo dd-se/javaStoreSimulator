@@ -23,6 +23,25 @@ public class PrintUtils {
     public final static String ORDER_FORMAT = "%-29s%-49s%-35s";
 
     public static void printOrders(List<Order> orders) {
+
+        orders.forEach(order -> {
+            System.out.println(Colors.YELLOW + "--- ORDER START ---" + Colors.RESET);
+            System.out.println(Colors.CYAN
+                    + String.format(ORDER_FORMAT, "Order ID: " + Colors.RESET + order.getOrderId() + Colors.CYAN,
+                            "Customer ID: " + Colors.RESET + order.getCustId() + Colors.CYAN,
+                            "Date: " + Colors.RESET + order.getOrderDate() + Colors.CYAN + "\n"));
+
+            order.getProductList().forEach(product -> {
+                System.out.println(product);
+            });
+            System.out.println(
+                    String.format("%87s", Colors.PURPLE + "TOTAL: " + Colors.WHITE +
+                            Parser.getCurrencyFormat(order.totalOrderCost()) + Colors.RESET));
+            System.out.print(Colors.YELLOW + "--- ORDER END ---\n" + Colors.RESET);
+        });
+    }
+
+    public static void printOrders2(List<Order> orders) {
         for (Order order : orders) {
             System.out.println(Colors.YELLOW + "--- ORDER START ---" + Colors.RESET);
 
@@ -52,14 +71,29 @@ public class PrintUtils {
         System.out.print(Colors.RESET);
     }
 
-    public static void printProducts(List<Product> products) {
+    public static void printProducts2(List<Product> products) {
         for (Product product : products) {
             System.out.println(Colors.CYAN + product);
         }
         System.out.print(Colors.RESET);
     }
 
+    public static void printProducts(List<Product> products) {
+        products.forEach(product -> {
+            System.out.println(product);
+        });
+    }
+
     public static boolean printMostPopularProducts(Map<String, Integer> sortedMostPopularProductsList, int howMany) {
+
+        System.out.println(Colors.YELLOW + String.format(POPULAR_PRODUCTS_FORMAT, POPULAR_PRODUCTS_HEADERS));
+        sortedMostPopularProductsList.forEach((k, v) -> {
+            System.out.println(String.format(POPULAR_PRODUCTS_FORMAT, k, v));
+        });
+        return true;
+    }
+
+    public static boolean printMostPopularProducts2(Map<String, Integer> sortedMostPopularProductsList, int howMany) {
         Set<String> sortedListNames = sortedMostPopularProductsList.keySet();
         Collection<Integer> sortedListValues = sortedMostPopularProductsList.values();
 

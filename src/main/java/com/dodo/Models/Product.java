@@ -66,4 +66,9 @@ public class Product implements Comparable<Product>, Serializable {
 
     }
 
+    public String toCsv() {
+        return this.prodId + "," + this.productName + "," + this.price + "\n";
+
+    }
+
 }

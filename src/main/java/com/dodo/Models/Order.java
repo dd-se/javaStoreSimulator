@@ -99,4 +99,20 @@ public class Order implements Comparable<Order>, Serializable {
 
         return order.toString();
     }
+
+    public String toCsv() {
+        StringBuilder productIds = new StringBuilder();
+        int counter = this.productList.size() - 1;
+        for (Product product : this.productList) {
+            if (counter-- == 0) {
+                productIds.append(product.getProdId() + ",");
+            } else {
+                productIds.append(product.getProdId() + "-");
+            }
+
+        }
+        String order = this.orderId + "," + this.custId + "," + productIds + this.getOrderDate() + "\n";
+        return order;
+
+    }
 }
