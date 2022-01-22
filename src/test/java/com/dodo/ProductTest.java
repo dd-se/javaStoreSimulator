@@ -30,9 +30,9 @@ public class ProductTest {
     @Test
     public void ShoudBeAbleToGetAndSetFields() {
         product.setPrice(501);
-        product.setProdId(99);
+        product.setProductId(99);
         assertEquals(501, product.getPrice());
-        assertEquals(99, product.getProdId());
+        assertEquals(99, product.getProductId());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ProductTest {
     @Test
     public void assertProperties() {
         assertThat(product, hasProperty("productName"));
-        assertThat(product, hasProperty("prodId"));
+        assertThat(product, hasProperty("productId"));
         assertThat(product, hasProperty("price"));
     }
 

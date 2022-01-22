@@ -30,6 +30,5 @@ public class Checkout {
         }
         System.out.println("You can't checkout, because your basket is empty.");
         return false;
-
     }
 }

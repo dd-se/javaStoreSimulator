@@ -127,7 +127,7 @@ public class StoreLoader {
         Path dir = Paths.get(directory);
         try {
             Path createdDirectory = Files.createDirectories(dir.toAbsolutePath());
-            System.out.println("Created: " + createdDirectory);
+            System.out.println("Created: " + createdDirectory + " to store future data.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -203,13 +203,17 @@ public class StoreLoader {
     private static List<Customer> customersLoader() {
         List<Customer> customers = new ArrayList<>();
         try (Scanner customerParser = new Scanner(new File(CUSTOMERS_PATH.toAbsolutePath().toString()))) {
+
             customerParser.useDelimiter(",|\n");
+
             while (customerParser.hasNext()) {
-                int custId = customerParser.nextInt();
+
+                int customerId = customerParser.nextInt();
                 String customerName = ListUtils.convertToTitleCase(customerParser.next());
                 String customerAddress = ListUtils.convertToTitleCase(customerParser.next());
                 String customerEmail = customerParser.next().toLowerCase();
-                customers.add(new Customer(custId, customerName, customerAddress, customerEmail));
+                customers.add(new Customer(customerId, customerName, customerAddress, customerEmail));
+
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();

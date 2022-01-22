@@ -103,13 +103,13 @@ public class Order implements Comparable<Order>, Serializable {
     public String toCsv() {
         StringBuilder productIds = new StringBuilder();
         int counter = this.productList.size() - 1;
+
         for (Product product : this.productList) {
             if (counter-- == 0) {
-                productIds.append(product.getProdId() + ",");
+                productIds.append(product.getProductId() + ",");
             } else {
-                productIds.append(product.getProdId() + "-");
+                productIds.append(product.getProductId() + "-");
             }
-
         }
         String order = this.orderId + "," + this.custId + "," + productIds + this.getOrderDate() + "\n";
         return order;
