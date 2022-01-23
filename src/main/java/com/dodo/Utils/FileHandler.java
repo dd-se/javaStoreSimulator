@@ -12,29 +12,7 @@ import com.dodo.Models.Order;
 
 public class FileHandler {
 
-    public static final String DIRNAME = "store_data";
-
-    public static final String PRODUCTS = "products.txt";
-
-    public static final String ORDERS = "orders.txt";
-
-    public static final String CUSTOMERS = "customers.txt";
-
-    public static final String LOGO = "logo.txt";
-
-    public static final String STORE = "store.bin";
-
-    public static final Path DIR_PATH = Paths.get(DIRNAME);
-
-    public static final Path STORE_PATH = Paths.get(DIRNAME, STORE);
-
-    public static final Path CUSTOMERS_PATH = Paths.get(DIRNAME, CUSTOMERS);
-
-    public static final Path ORDERS_PATH = Paths.get(DIRNAME, ORDERS);
-
-    public static final Path PRODUCTS_PATH = Paths.get(DIRNAME, PRODUCTS);
-
-    public static final Path LOGO_PATH = Paths.get(DIRNAME, LOGO);
+    public static final String DIRNAME = CsvHandler.DIRNAME;
 
     public static void createDirectory(String directory) {
         Path dir = Paths.get(directory);
