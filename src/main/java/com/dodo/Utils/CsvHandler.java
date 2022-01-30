@@ -34,20 +34,29 @@ public class CsvHandler {
     public static final Path PRODUCTS_PATH = Paths.get(DIRNAME, PRODUCTS);
 
     public static Store csvToStoreLoader() {
-        List<Product> products = productsLoader();
-        if (!products.isEmpty()) {
-            List<Order> orders = ordersLoader(products);
-            List<Customer> customers = customersLoader();
+        List<Product> products;
+        List<Order> orders;
+        List<Customer> customers;
+        try {
+            products = productsLoader();
+            orders = ordersLoader(products);
+            customers = customersLoader();
             return new Store(products, orders, customers);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
         return new Store(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
     }
 
     public static void storeToCsvSaver(Store store) {
-        if (!Files.isDirectory(DIR_PATH)) {
-            FileHandler.createDirectory(DIRNAME);
-        }
         try {
+            if (!Files.isDirectory(DIR_PATH)) {
+                Path createdDirectory = FileHandler.createDirectory(DIRNAME);
+                System.out.println("Created: " + createdDirectory + " to store future data.");
+            }
             Files.write(CUSTOMERS_PATH, store.customersToBytes());
             Files.write(PRODUCTS_PATH, store.productsToBytes());
             Files.write(ORDERS_PATH, store.ordersToBytes());
@@ -56,7 +65,8 @@ public class CsvHandler {
         }
     }
 
-    private static List<Order> ordersLoader(List<Product> storeProducts) {
+    private static List<Order> ordersLoader(List<Product> storeProducts)
+            throws NumberFormatException, FileNotFoundException {
         List<Order> orders = new ArrayList<>();
 
         try (Scanner orderParser = new Scanner(new File(ORDERS_PATH.toAbsolutePath().toString()))) {
@@ -74,15 +84,12 @@ public class CsvHandler {
                 String orderDate = orderParser.next();
                 orders.add(new Order(orderId, custId, productList, orderDate));
             }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return orders;
         }
-        return orders;
+
     }
 
-    private static List<Customer> customersLoader() {
+    private static List<Customer> customersLoader() throws NumberFormatException, FileNotFoundException {
         List<Customer> customers = new ArrayList<>();
         try (Scanner customerParser = new Scanner(new File(CUSTOMERS_PATH.toAbsolutePath().toString()))) {
 
@@ -97,33 +104,30 @@ public class CsvHandler {
                 customers.add(new Customer(customerId, customerName, customerAddress, customerEmail));
 
             }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return customers;
         }
-        return customers;
+
     }
 
-    private static List<Product> productsLoader() {
+    private static List<Product> productsLoader() throws NumberFormatException, FileNotFoundException {
 
         List<Product> products = new ArrayList<>();
 
         try (Scanner productParser = new Scanner(new File(PRODUCTS_PATH.toAbsolutePath().toString()))) {
 
             productParser.useDelimiter(",|\n");
+
             while (productParser.hasNext()) {
+
                 int prodId = productParser.nextInt();
                 String productName = productParser.next();
                 double price = Double.valueOf(productParser.next());
                 products.add(new Product(prodId, productName, price));
+
             }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return products;
         }
-        return products;
+
     }
 
 }

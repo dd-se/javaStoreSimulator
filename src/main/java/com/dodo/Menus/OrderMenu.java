@@ -74,53 +74,59 @@ public class OrderMenu {
     public static void takeOrderHandler(List<Product> storeProducts, List<Order> storeOrders) {
         PrintUtils.printProducts(storeProducts);
         List<Product> customerBasket = new ArrayList<>();
-        while (true) {
+        boolean isRunning = true;
+        while (isRunning) {
 
             System.out.print("Type [help] to see commands: ");
-            String[] input = App.scanner.nextLine().toUpperCase().split(" ");
+            String[] input = App.scanner.nextLine().toUpperCase().split("\\s+");
             if (input.length < 2 && !SINGULAR_COMMANDS.contains(input[0])) {
-                System.out.println(Colors.RED + "Invalid command." + Colors.RESET);
+                System.out.println(App.INVALID_INPUT);
                 continue;
             }
-            if (input[0].equals("HELP")) {
-                TakeOrder.helpMenu();
-
-            } else if (input[0].equals("ADD")) {
-
-                try {
-                    int productId = Parser.parseInt(input[1]);
-                    AddToBasket.addToBasket(productId, customerBasket, storeProducts);
-                } catch (NumberFormatException e) {
-                    System.out.println("Not an integer.");
-                } catch (ProductNotFoundException e) {
-                    System.out.println(e.getMessage());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            } else if (input[0].equals("REMOVE")) {
-                try {
-                    String productName = input[1];
-                    RemoveFromBasket.removeFromBasket(customerBasket, productName);
-                } catch (ProductNotFoundException e) {
-                    System.out.println(e.getMessage());
-                }
-
-            } else if (input[0].equals("CHECKOUT")) {
-                boolean checkOutIsSuccessful = Checkout.checkout(customerBasket, storeOrders, true);
-                if (checkOutIsSuccessful) {
+            switch (input[0]) {
+                case "HELP":
+                    TakeOrder.helpMenu();
                     break;
-                }
-
-            } else if (input[0].equals("RANDOM")) {
-                Product randomProduct = (Product) ListUtils.pickRandomFromCollection(storeProducts);
-                System.out.println(
-                        Colors.YELLOW + "Added " + randomProduct.getProductName() + " to your basket." + Colors.RESET);
-                customerBasket.add(randomProduct);
-
-            } else if (input[0].equals("ABORT")) {
-                System.out.println(Colors.RED + "Order deleted, thank you and please come again." + Colors.RESET);
-                break;
+                case "ADD":
+                    try {
+                        int productId = Parser.parseInt(input[1]);
+                        AddToBasket.addToBasket(productId, customerBasket, storeProducts);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Not an integer.");
+                    } catch (ProductNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "REMOVE":
+                    try {
+                        String productName = input[1];
+                        RemoveFromBasket.removeFromBasket(customerBasket, productName);
+                    } catch (ProductNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case "CHECKOUT":
+                    boolean checkOutIsSuccessful = Checkout.checkout(customerBasket, storeOrders, true);
+                    if (checkOutIsSuccessful) {
+                        isRunning = false;
+                    }
+                    break;
+                case "RANDOM":
+                    Product randomProduct = (Product) ListUtils.pickRandomFromCollection(storeProducts);
+                    System.out.println(
+                            Colors.YELLOW + "Added " + randomProduct.getProductName() + " to your basket."
+                                    + Colors.RESET);
+                    customerBasket.add(randomProduct);
+                    break;
+                case "ABORT":
+                    System.out.println(Colors.RED + "Order deleted, thank you and please come again." + Colors.RESET);
+                    isRunning = false;
+                    break;
+                default:
+                    System.out.println(App.INVALID_INPUT);
+                    break;
             }
         }
     }

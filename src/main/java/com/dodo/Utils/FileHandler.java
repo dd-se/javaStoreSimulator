@@ -14,21 +14,16 @@ public class FileHandler {
 
     public static final String DIRNAME = CsvHandler.DIRNAME;
 
-    public static void createDirectory(String directory) {
+    public static Path createDirectory(String directory) throws IOException {
         Path dir = Paths.get(directory);
-        try {
-            Path createdDirectory = Files.createDirectories(dir.toAbsolutePath());
-            System.out.println("Created: " + createdDirectory + " to store future data.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Path createdDirectory = Files.createDirectories(dir.toAbsolutePath());
+        return createdDirectory;
+
     }
 
     public static List<String> readAllLines(String filename) throws IOException {
         Path path = Paths.get(DIRNAME, filename);
-        List<String> readAllLines;
-        readAllLines = Files.readAllLines(path);
-        return readAllLines;
+        return Files.readAllLines(path);
 
     }
 

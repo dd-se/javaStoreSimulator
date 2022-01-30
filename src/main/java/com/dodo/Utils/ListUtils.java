@@ -128,4 +128,13 @@ public class ListUtils {
         Map<String, Integer> sortedList = ListUtils.sortMapByValue(soldProductsMap);
         return sortedList;
     }
+
+    public static void main(String[] args) {
+        String[] Strings = { "Mamma mia", "mamma Mia", "MAmMa  Mia", "mammaMia", "" };
+        for (String string : Strings) {
+            String convertToTitleCase = convertToTitleCase(string);
+            System.out.println(convertToTitleCase);
+        }
+
+    }
 }
