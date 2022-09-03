@@ -16,6 +16,3 @@ A program for simulating food orders. You can add products, orders, customers an
 * Execute ```java -jar store_simulator.jar```
 * The program is self explanatory, but feel free to type ```help``` when in order mode to see all the relevant commands.
 * In main menu type ```e``` to quit program. (If not, type ```b``` until you are.)
-
-### Author: 
-+ [Dåkan](https://gitlab.com/dodo_devops)
